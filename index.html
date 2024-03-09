@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>AULA CLEAN CODE</h1>
+
+    <label for="primeiroValor">Valor:</label>
+    <input type="text" id="primeiroValor" />
+    <br><br>
+
+    <label for="segundoValor">Valor:</label>
+    <input type="text" id="segundoValor" />
+    <br><br>
+
+    <input type="button" value="Somar" onclick="calculadora('somar')" />
+    <br><br>
+
+    <input type="button" value="Subtrair" onclick="calculadora('subtrair')" />
+    <br><br>
+
+    <input type="button" value="Dividir" onclick="calculadora('dividir')" />
+    <br><br>
+
+    <label for="resultado">Resultado:</label>
+    <input type="text" id="resultado" readonly />
+
+    <script>
+        function calculadora(tipoOperacao) {
+            var primeiroValorHTML = document.getElementById("primeiroValor").value;
+            var segundoValorHTML = document.getElementById("segundoValor").value;
+        
+            logar("o valor de a: " + primeiroValorHTML);
+            logar("o valor de b: " + segundoValorHTML);
+            
+            var primeiroValor = parseInt(primeiroValorHTML);
+            var segundoValor = parseInt(segundoValorHTML);
+            var resultado = 0;
+
+            if (tipoOperacao === 'somar') {
+                resultado = somar(primeiroValor, segundoValor);
+            }else if (tipoOperacao === 'subtrair') {
+                resultado = subtrair(primeiroValor, segundoValor);
+            } else if (tipoOperacao === 'dividir') {
+                resultado = dividir(primeiroValor, segundoValor);
+            }
+
+            Resultado(resultado);
+        }
+
+        function somar(primeiroValor, segundoValor) {           
+
+            if (ValidarOperacaoMatematica(primeiroValor, segundoValor)) {   
+                return primeiroValor + segundoValor;
+            }            
+        }
+
+        function subtrair(primeiroValor, segundoValor) {       
+
+            if (ValidarOperacaoMatematica(primeiroValor, segundoValor)) {   
+                return primeiroValor - segundoValor;    
+            }    
+        }
+
+        function dividir(primeiroValor, segundoValor) {       
+
+            if (ValidarOperacaoMatematica(primeiroValor, segundoValor) && segundoValor > 0) {   
+                return primeiroValor / segundoValor;    
+            }    
+        }
+
+        function ValidarOperacaoMatematica(primeiroNumero, segundoNumero) {
+            if (ValidarNumeroPositivo(primeiroNumero) && 
+                ValidarNumeroPositivo(segundoNumero)) {
+                    return true;
+                }
+
+            return false;
+        }
+
+        function ValidarNumeroPositivo(numero) {
+            if (numero > 0) {
+                return true;
+            }
+
+            return false;
+        }
+
+        function Resultado(resultado) {
+            document.getElementById("resultado").value = resultado;  
+        }
+
+        function logar(mensagem) {
+            console.log(mensagem);
+        }
+    </script>
+</body>
+</html>
+
+
+
+// CLEAN CODE - REGRAS
+
+// 1 - clareza no nomes
+// 2 - objetividade 
+// 3 - tem legivel
+// 4 - reutilizar
+// 5 - responsabilidade
